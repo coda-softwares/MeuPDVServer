@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+echo Carregando schema...
+
+mysql -u mpdv --password=ab0cfde2c1 --execute='\. scheme.sql'
+
+echo FIM

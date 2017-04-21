@@ -1,10 +1,14 @@
 from japronto import Application
+import dbmanager as dbm
 
-def hello(req):
-    return req.Response(text="Hello World")
+def login(req):
+    # Estrutura do login
+    # Utilizando HMAC
+    params = req.query
 
+def logout(req):
+    pass
 
 app = Application()
 
-app.router.add_route("/", hello)
 app.run(debug=True, port=2017)
