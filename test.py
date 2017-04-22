@@ -1,10 +1,17 @@
-from japronto import Application
+import dbmanager as dbm
 
 
-def hello(req):
-    return req.Response(text=str(req.query))
+# DECLARA PARA FUTUTO USO
+SELECT_FORNECEDOR = """
+SELECT * FROM Fornecedor
+WHERE nome_Forn=%s
+"""
 
-app = Application()
+# Instancia uma nova conexão dentro deste bloco de codigo
+with dbm.Connection() as con:
+    injection = "Jefferson;SELECT * FROM Fornecedor"
+    res = con.execute(SELECT_FORNECEDOR, [injection])
+    for r in res:
+        print("\nRESPONSE: "+str(r))
 
-app.router.add_route('/', hello)
-app.run(debug=True, port=8080)
+    # Quando o bloco de codigo termina, ele fecha a conexão

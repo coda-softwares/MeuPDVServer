@@ -1,0 +1,1428 @@
+Help on package MySQLdb:
+
+NNAAMMEE
+    MySQLdb - MySQLdb - A DB API v2.0 compatible interface to MySQL.
+
+DDEESSCCRRIIPPTTIIOONN
+    This package is a wrapper around _mysql, which mostly implements the
+    MySQL C API.
+    
+    connect() -- connects to server
+    
+    See the C API specification and the MySQL documentation for more info
+    on other items.
+    
+    For information on how MySQLdb handles type conversion, see the
+    MySQLdb.converters module.
+
+PPAACCKKAAGGEE  CCOONNTTEENNTTSS
+    compat
+    connections
+    constants (package)
+    converters
+    cursors
+    release
+    times
+
+SSUUBBMMOODDUULLEESS
+    FIELD_TYPE
+
+CCLLAASSSSEESS
+    builtins.Exception(builtins.BaseException)
+        _mysql_exceptions.MySQLError
+            _mysql_exceptions.Error
+                _mysql_exceptions.DatabaseError
+                    _mysql_exceptions.DataError
+                    _mysql_exceptions.IntegrityError
+                    _mysql_exceptions.InternalError
+                    _mysql_exceptions.NotSupportedError
+                    _mysql_exceptions.OperationalError
+                    _mysql_exceptions.ProgrammingError
+                _mysql_exceptions.InterfaceError
+            _mysql_exceptions.Warning(builtins.Warning, _mysql_exceptions.MySQLError)
+    builtins.Warning(builtins.Exception)
+        _mysql_exceptions.Warning(builtins.Warning, _mysql_exceptions.MySQLError)
+    builtins.frozenset(builtins.object)
+        DBAPISet
+    builtins.object
+        datetime.date
+            datetime.datetime
+        datetime.time
+    
+    class DDBBAAPPIISSeett(builtins.frozenset)
+     |  A special type of set for which A == x is true if A is a
+     |  DBAPISet and x is a member of that set.
+     |  
+     |  Method resolution order:
+     |      DBAPISet
+     |      builtins.frozenset
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____eeqq____(self, other)
+     |      Return self==value.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  ____hhaasshh____ = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.frozenset:
+     |  
+     |  ____aanndd____(self, value, /)
+     |      Return self&value.
+     |  
+     |  ____ccoonnttaaiinnss____(...)
+     |      x.__contains__(y) <==> y in x.
+     |  
+     |  ____ggee____(self, value, /)
+     |      Return self>=value.
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____ggtt____(self, value, /)
+     |      Return self>value.
+     |  
+     |  ____iitteerr____(self, /)
+     |      Implement iter(self).
+     |  
+     |  ____llee____(self, value, /)
+     |      Return self<=value.
+     |  
+     |  ____lleenn____(self, /)
+     |      Return len(self).
+     |  
+     |  ____lltt____(self, value, /)
+     |      Return self<value.
+     |  
+     |  ____nnee____(self, value, /)
+     |      Return self!=value.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____oorr____(self, value, /)
+     |      Return self|value.
+     |  
+     |  ____rraanndd____(self, value, /)
+     |      Return value&self.
+     |  
+     |  ____rreedduuccee____(...)
+     |      Return state information for pickling.
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____rroorr____(self, value, /)
+     |      Return value|self.
+     |  
+     |  ____rrssuubb____(self, value, /)
+     |      Return value-self.
+     |  
+     |  ____rrxxoorr____(self, value, /)
+     |      Return value^self.
+     |  
+     |  ____ssiizzeeooff____(...)
+     |      S.__sizeof__() -> size of S in memory, in bytes
+     |  
+     |  ____ssuubb____(self, value, /)
+     |      Return self-value.
+     |  
+     |  ____xxoorr____(self, value, /)
+     |      Return self^value.
+     |  
+     |  ccooppyy(...)
+     |      Return a shallow copy of a set.
+     |  
+     |  ddiiffffeerreennccee(...)
+     |      Return the difference of two or more sets as a new set.
+     |      
+     |      (i.e. all elements that are in this set but not the others.)
+     |  
+     |  iinntteerrsseeccttiioonn(...)
+     |      Return the intersection of two sets as a new set.
+     |      
+     |      (i.e. all elements that are in both sets.)
+     |  
+     |  iissddiissjjooiinntt(...)
+     |      Return True if two sets have a null intersection.
+     |  
+     |  iissssuubbsseett(...)
+     |      Report whether another set contains this set.
+     |  
+     |  iissssuuppeerrsseett(...)
+     |      Report whether this set contains another set.
+     |  
+     |  ssyymmmmeettrriicc__ddiiffffeerreennccee(...)
+     |      Return the symmetric difference of two sets as a new set.
+     |      
+     |      (i.e. all elements that are in exactly one of the sets.)
+     |  
+     |  uunniioonn(...)
+     |      Return the union of sets as a new set.
+     |      
+     |      (i.e. all elements that are in either set.)
+    
+    class DDaattaaEErrrroorr(DatabaseError)
+     |  Exception raised for errors that are due to problems with the
+     |  processed data like division by zero, numeric value out of range,
+     |  etc.
+     |  
+     |  Method resolution order:
+     |      DataError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class DDaattaabbaasseeEErrrroorr(Error)
+     |  Exception raised for errors that are related to the
+     |  database.
+     |  
+     |  Method resolution order:
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    DDaattee = class date(builtins.object)
+     |  date(year, month, day) --> date object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____aadddd____(self, value, /)
+     |      Return self+value.
+     |  
+     |  ____eeqq____(self, value, /)
+     |      Return self==value.
+     |  
+     |  ____ffoorrmmaatt____(...)
+     |      Formats self with strftime.
+     |  
+     |  ____ggee____(self, value, /)
+     |      Return self>=value.
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____ggtt____(self, value, /)
+     |      Return self>value.
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____llee____(self, value, /)
+     |      Return self<=value.
+     |  
+     |  ____lltt____(self, value, /)
+     |      Return self<value.
+     |  
+     |  ____nnee____(self, value, /)
+     |      Return self!=value.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rraadddd____(self, value, /)
+     |      Return value+self.
+     |  
+     |  ____rreedduuccee____(...)
+     |      __reduce__() -> (cls, state)
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____rrssuubb____(self, value, /)
+     |      Return value-self.
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  ____ssuubb____(self, value, /)
+     |      Return self-value.
+     |  
+     |  ccttiimmee(...)
+     |      Return ctime() style string.
+     |  
+     |  ffrroommoorrddiinnaall(...) from builtins.type
+     |      int -> date corresponding to a proleptic Gregorian ordinal.
+     |  
+     |  ffrroommttiimmeessttaammpp(...) from builtins.type
+     |      timestamp -> local date from a POSIX timestamp (like time.time()).
+     |  
+     |  iissooccaalleennddaarr(...)
+     |      Return a 3-tuple containing ISO year, week number, and weekday.
+     |  
+     |  iissooffoorrmmaatt(...)
+     |      Return string in ISO 8601 format, YYYY-MM-DD.
+     |  
+     |  iissoowweeeekkddaayy(...)
+     |      Return the day of the week represented by the date.
+     |      Monday == 1 ... Sunday == 7
+     |  
+     |  rreeppllaaccee(...)
+     |      Return date with new specified fields.
+     |  
+     |  ssttrrffttiimmee(...)
+     |      format -> strftime() style string.
+     |  
+     |  ttiimmeettuuppllee(...)
+     |      Return time tuple, compatible with time.localtime().
+     |  
+     |  ttooddaayy(...) from builtins.type
+     |      Current date or datetime:  same as self.__class__.fromtimestamp(time.time()).
+     |  
+     |  ttoooorrddiinnaall(...)
+     |      Return proleptic Gregorian ordinal.  January 1 of year 1 is day 1.
+     |  
+     |  wweeeekkddaayy(...)
+     |      Return the day of the week represented by the date.
+     |      Monday == 0 ... Sunday == 6
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ddaayy
+     |  
+     |  mmoonntthh
+     |  
+     |  yyeeaarr
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  mmaaxx = datetime.date(9999, 12, 31)
+     |  
+     |  mmiinn = datetime.date(1, 1, 1)
+     |  
+     |  rreessoolluuttiioonn = datetime.timedelta(1)
+    
+    class EErrrroorr(MySQLError)
+     |  Exception that is the base class of all other error exceptions
+     |  (not Warning).
+     |  
+     |  Method resolution order:
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class IInntteeggrriittyyEErrrroorr(DatabaseError)
+     |  Exception raised when the relational integrity of the database
+     |  is affected, e.g. a foreign key check fails, duplicate key,
+     |  etc.
+     |  
+     |  Method resolution order:
+     |      IntegrityError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class IInntteerrffaacceeEErrrroorr(Error)
+     |  Exception raised for errors that are related to the database
+     |  interface rather than the database itself.
+     |  
+     |  Method resolution order:
+     |      InterfaceError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class IInntteerrnnaallEErrrroorr(DatabaseError)
+     |  Exception raised when the database encounters an internal
+     |  error, e.g. the cursor is not valid anymore, the transaction is
+     |  out of sync, etc.
+     |  
+     |  Method resolution order:
+     |      InternalError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class MMyySSQQLLEErrrroorr(builtins.Exception)
+     |  Exception related to operation with MySQL.
+     |  
+     |  Method resolution order:
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class NNoottSSuuppppoorrtteeddEErrrroorr(DatabaseError)
+     |  Exception raised in case a method or database API was used
+     |  which is not supported by the database, e.g. requesting a
+     |  .rollback() on a connection that does not support transaction or
+     |  has transactions turned off.
+     |  
+     |  Method resolution order:
+     |      NotSupportedError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class OOppeerraattiioonnaallEErrrroorr(DatabaseError)
+     |  Exception raised for errors that are related to the database's
+     |  operation and not necessarily under the control of the programmer,
+     |  e.g. an unexpected disconnect occurs, the data source name is not
+     |  found, a transaction could not be processed, a memory allocation
+     |  error occurred during processing, etc.
+     |  
+     |  Method resolution order:
+     |      OperationalError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class PPrrooggrraammmmiinnggEErrrroorr(DatabaseError)
+     |  Exception raised for programming errors, e.g. table not found
+     |  or already exists, syntax error in the SQL statement, wrong number
+     |  of parameters specified, etc.
+     |  
+     |  Method resolution order:
+     |      ProgrammingError
+     |      DatabaseError
+     |      Error
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from MySQLError:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    TTiimmee = class time(builtins.object)
+     |  time([hour[, minute[, second[, microsecond[, tzinfo]]]]]) --> a time object
+     |  
+     |  All arguments are optional. tzinfo may be None, or an instance of
+     |  a tzinfo subclass. The remaining arguments may be ints.
+     |  
+     |  Methods defined here:
+     |  
+     |  ____eeqq____(self, value, /)
+     |      Return self==value.
+     |  
+     |  ____ffoorrmmaatt____(...)
+     |      Formats self with strftime.
+     |  
+     |  ____ggee____(self, value, /)
+     |      Return self>=value.
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____ggtt____(self, value, /)
+     |      Return self>value.
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____llee____(self, value, /)
+     |      Return self<=value.
+     |  
+     |  ____lltt____(self, value, /)
+     |      Return self<value.
+     |  
+     |  ____nnee____(self, value, /)
+     |      Return self!=value.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rreedduuccee____(...)
+     |      __reduce__() -> (cls, state)
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  ddsstt(...)
+     |      Return self.tzinfo.dst(self).
+     |  
+     |  iissooffoorrmmaatt(...)
+     |      Return string in ISO 8601 format, HH:MM:SS[.mmmmmm][+HH:MM].
+     |  
+     |  rreeppllaaccee(...)
+     |      Return time with new specified fields.
+     |  
+     |  ssttrrffttiimmee(...)
+     |      format -> strftime() style string.
+     |  
+     |  ttzznnaammee(...)
+     |      Return self.tzinfo.tzname(self).
+     |  
+     |  uuttccooffffsseett(...)
+     |      Return self.tzinfo.utcoffset(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  hhoouurr
+     |  
+     |  mmiiccrroosseeccoonndd
+     |  
+     |  mmiinnuuttee
+     |  
+     |  sseeccoonndd
+     |  
+     |  ttzziinnffoo
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  mmaaxx = datetime.time(23, 59, 59, 999999)
+     |  
+     |  mmiinn = datetime.time(0, 0)
+     |  
+     |  rreessoolluuttiioonn = datetime.timedelta(0, 0, 1)
+    
+    TTiimmeessttaammpp = class datetime(date)
+     |  datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])
+     |  
+     |  The year, month and day arguments are required. tzinfo may be None, or an
+     |  instance of a tzinfo subclass. The remaining arguments may be ints.
+     |  
+     |  Method resolution order:
+     |      datetime
+     |      date
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____aadddd____(self, value, /)
+     |      Return self+value.
+     |  
+     |  ____eeqq____(self, value, /)
+     |      Return self==value.
+     |  
+     |  ____ggee____(self, value, /)
+     |      Return self>=value.
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____ggtt____(self, value, /)
+     |      Return self>value.
+     |  
+     |  ____hhaasshh____(self, /)
+     |      Return hash(self).
+     |  
+     |  ____llee____(self, value, /)
+     |      Return self<=value.
+     |  
+     |  ____lltt____(self, value, /)
+     |      Return self<value.
+     |  
+     |  ____nnee____(self, value, /)
+     |      Return self!=value.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ____rraadddd____(self, value, /)
+     |      Return value+self.
+     |  
+     |  ____rreedduuccee____(...)
+     |      __reduce__() -> (cls, state)
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____rrssuubb____(self, value, /)
+     |      Return value-self.
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  ____ssuubb____(self, value, /)
+     |      Return self-value.
+     |  
+     |  aassttiimmeezzoonnee(...)
+     |      tz -> convert to local time in new timezone tz
+     |  
+     |  ccoommbbiinnee(...) from builtins.type
+     |      date, time -> datetime with same date and time fields
+     |  
+     |  ccttiimmee(...)
+     |      Return ctime() style string.
+     |  
+     |  ddaattee(...)
+     |      Return date object with same year, month and day.
+     |  
+     |  ddsstt(...)
+     |      Return self.tzinfo.dst(self).
+     |  
+     |  ffrroommttiimmeessttaammpp(...) from builtins.type
+     |      timestamp[, tz] -> tz's local time from POSIX timestamp.
+     |  
+     |  iissooffoorrmmaatt(...)
+     |      [sep] -> string in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm][+HH:MM].
+     |      
+     |      sep is used to separate the year from the time, and defaults to 'T'.
+     |  
+     |  nnooww(tz=None) from builtins.type
+     |      Returns new datetime object representing current time local to tz.
+     |      
+     |        tz
+     |          Timezone object.
+     |      
+     |      If no tz is specified, uses local timezone.
+     |  
+     |  rreeppllaaccee(...)
+     |      Return datetime with new specified fields.
+     |  
+     |  ssttrrppttiimmee(...) from builtins.type
+     |      string, format -> new datetime parsed from a string (like time.strptime()).
+     |  
+     |  ttiimmee(...)
+     |      Return time object with same time but with tzinfo=None.
+     |  
+     |  ttiimmeessttaammpp(...)
+     |      Return POSIX timestamp as float.
+     |  
+     |  ttiimmeettuuppllee(...)
+     |      Return time tuple, compatible with time.localtime().
+     |  
+     |  ttiimmeettzz(...)
+     |      Return time object with same time and tzinfo.
+     |  
+     |  ttzznnaammee(...)
+     |      Return self.tzinfo.tzname(self).
+     |  
+     |  uuttccffrroommttiimmeessttaammpp(...) from builtins.type
+     |      Construct a naive UTC datetime from a POSIX timestamp.
+     |  
+     |  uuttccnnooww(...) from builtins.type
+     |      Return a new datetime representing UTC day and time.
+     |  
+     |  uuttccooffffsseett(...)
+     |      Return self.tzinfo.utcoffset(self).
+     |  
+     |  uuttccttiimmeettuuppllee(...)
+     |      Return UTC time tuple, compatible with time.localtime().
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  hhoouurr
+     |  
+     |  mmiiccrroosseeccoonndd
+     |  
+     |  mmiinnuuttee
+     |  
+     |  sseeccoonndd
+     |  
+     |  ttzziinnffoo
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  mmaaxx = datetime.datetime(9999, 12, 31, 23, 59, 59, 999999)
+     |  
+     |  mmiinn = datetime.datetime(1, 1, 1, 0, 0)
+     |  
+     |  rreessoolluuttiioonn = datetime.timedelta(0, 0, 1)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from date:
+     |  
+     |  ____ffoorrmmaatt____(...)
+     |      Formats self with strftime.
+     |  
+     |  ffrroommoorrddiinnaall(...) from builtins.type
+     |      int -> date corresponding to a proleptic Gregorian ordinal.
+     |  
+     |  iissooccaalleennddaarr(...)
+     |      Return a 3-tuple containing ISO year, week number, and weekday.
+     |  
+     |  iissoowweeeekkddaayy(...)
+     |      Return the day of the week represented by the date.
+     |      Monday == 1 ... Sunday == 7
+     |  
+     |  ssttrrffttiimmee(...)
+     |      format -> strftime() style string.
+     |  
+     |  ttooddaayy(...) from builtins.type
+     |      Current date or datetime:  same as self.__class__.fromtimestamp(time.time()).
+     |  
+     |  ttoooorrddiinnaall(...)
+     |      Return proleptic Gregorian ordinal.  January 1 of year 1 is day 1.
+     |  
+     |  wweeeekkddaayy(...)
+     |      Return the day of the week represented by the date.
+     |      Monday == 0 ... Sunday == 6
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from date:
+     |  
+     |  ddaayy
+     |  
+     |  mmoonntthh
+     |  
+     |  yyeeaarr
+    
+    class WWaarrnniinngg(builtins.Warning, MySQLError)
+     |  Exception raised for important warnings like data truncations
+     |  while inserting, etc.
+     |  
+     |  Method resolution order:
+     |      Warning
+     |      builtins.Warning
+     |      MySQLError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+
+FFUUNNCCTTIIOONNSS
+    BBiinnaarryy(x)
+    
+    CCoonnnneecctt(*args, **kwargs)
+        Factory function for connections.Connection.
+    
+    CCoonnnneeccttiioonn = Connect(*args, **kwargs)
+        Factory function for connections.Connection.
+    
+    DDaatteeFFrroommTTiicckkss(ticks)
+        Convert UNIX ticks into a date instance.
+    
+    TTiimmeeFFrroommTTiicckkss(ticks)
+        Convert UNIX ticks into a time instance.
+    
+    TTiimmeessttaammppFFrroommTTiicckkss(ticks)
+        Convert UNIX ticks into a datetime instance.
+    
+    ccoonnnneecctt = Connect(*args, **kwargs)
+        Factory function for connections.Connection.
+    
+    ddeebbuugg(...)
+        Does a DBUG_PUSH with the given string.
+        mysql_debug() uses the Fred Fish debug library.
+        To use this function, you must compile the client library to
+        support debugging.
+    
+    eessccaappee(...)
+        escape(obj, dict) -- escape any special characters in object obj
+        using mapping dict to provide quoting functions for each type.
+        Returns a SQL literal string.
+    
+    eessccaappee__ddiicctt(...)
+        escape_sequence(d, dict) -- escape any special characters in
+        dictionary d using mapping dict to provide quoting functions for each type.
+        Returns a dictionary of escaped items.
+    
+    eessccaappee__sseeqquueennccee(...)
+        escape_sequence(seq, dict) -- escape any special characters in sequence
+        seq using mapping dict to provide quoting functions for each type.
+        Returns a tuple of escaped items.
+    
+    eessccaappee__ssttrriinngg(...)
+        escape_string(s) -- quote any SQL-interpreted characters in string s.
+        
+        Use connection.escape_string(s), if you use it at all.
+        _mysql.escape_string(s) cannot handle character sets. You are
+        probably better off using connection.escape(o) instead, since
+        it will escape entire sequences as well as strings.
+    
+    ggeett__cclliieenntt__iinnffoo(...)
+        get_client_info() -- Returns a string that represents
+        the client library version.
+    
+    ssttrriinngg__lliitteerraall(...)
+        string_literal(obj) -- converts object obj into a SQL string literal.
+        This means, any special SQL characters are escaped, and it is enclosed
+        within single quotes. In other words, it performs:
+        
+        "'%s'" % escape_string(str(obj))
+        
+        Use connection.string_literal(obj), if you use it at all.
+        _mysql.string_literal(obj) cannot handle character sets.
+
+DDAATTAA
+    BBIINNAARRYY = DBAPISet({249, 250, 251, 252})
+    DDAATTEE = DBAPISet({10, 14})
+    NNUULLLL = 'NULL'
+    NNUUMMBBEERR = DBAPISet({0, 1, 3, 4, 5, 8, 9, 13})
+    RROOWWIIDD = DBAPISet()
+    SSTTRRIINNGG = DBAPISet({253, 254, 247})
+    TTIIMMEE = DBAPISet({11})
+    TTIIMMEESSTTAAMMPP = DBAPISet({12, 7})
+    ____aallll____ = ['BINARY', 'Binary', 'Connect', 'Connection', 'DATE', 'Date'...
+    ____rreevviissiioonn____ = ''
+    aappiilleevveell = '2.0'
+    ppaarraammssttyyllee = 'format'
+    tthhrreeaaddssaaffeettyy = 1
+    vveerrssiioonn__iinnffoo = (1, 3, 7, 'final', 1)
+
+VVEERRSSIIOONN
+    1.3.7
+
+AAUUTTHHOORR
+    Andy Dustman <farcepest@gmail.com>
+
+FFIILLEE
+    /usr/lib/python3/dist-packages/MySQLdb/__init__.py
+

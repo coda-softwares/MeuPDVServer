@@ -1,5 +1,5 @@
 from japronto import Application
-import dbmanager as dbm
+# import dbmanager as dbm
 import json as JSON
 
 loged = []
@@ -7,9 +7,14 @@ loged = []
 def login(req):
     # Estrutura do login
     # Utilizando HMAC
-    text = req.body
-    res = req.Response(text=text, mime_type='text/plain')
-    return res
+    json = JSON.JSONEncoder()
+    data = {
+        'corpo': req.json
+    }
+    return req.Response(text=json.encode(data), mime_type='json')
+    # text = str(dir(req))+"--\nform: \n"+str(req.form)+"--\nfiles: "+str(req.files)s
+    # res = req.Response(text=text)
+    # return res
 
 
 def logout(req):
@@ -18,4 +23,4 @@ def logout(req):
 app = Application()
 app.router.add_route('/login', login)
 app.router.add_route('/logout', logout)
-app.run(debug=True, port=8080)
+app.run(debug=True, port=80)
