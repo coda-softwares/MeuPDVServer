@@ -9,7 +9,7 @@ WHERE nome_Forn=%s
 
 # Instancia uma nova conexão dentro deste bloco de codigo
 with dbm.Connection() as con:
-    injection = "Jefferson;SELECT * FROM Fornecedor"
+    injection = "Jefferson"#SELECT * FROM Fornecedor"
     res = con.execute(SELECT_FORNECEDOR, [injection])
     for r in res:
         print("\nRESPONSE: "+str(r))
