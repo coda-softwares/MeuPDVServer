@@ -50,7 +50,7 @@ def login(req):
     # Connect to the database
     with dbm.Connection() as con:
         # Retrieve 0 if no login found
-        re = con.execute(dbm.LOGIN, [params['username'], params['passwd']])
+        re = con.execute(dbm.LOGIN, [params['username'], params['password']])
         if len(re)==0:
             data['status'] = 'LOGIN_FAILED'
 
