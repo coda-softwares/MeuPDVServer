@@ -7,7 +7,6 @@ import json as JSON
 # Encoder de json, para retornar para o usuário
 json = JSON.JSONEncoder()
 
-# FIXME: Não cadastra e nem retorna algum erro
 # Registrar usuário pela utilização de procedures
 def register(req):
     params = {}
