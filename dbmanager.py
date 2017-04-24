@@ -18,12 +18,15 @@ class Connection:
         for line in range(c.execute(string,params)):
             final.append(c.fetchone())
 
+        c.close()
+
         return final
 
     def __exit__(self, type, value, traceback):
+        self.con.commit()
         self.con.close()
 
-REGISTER = "CALL Register(%s, %s, %s)"
+REGISTER = "CALL Register(%s, %s, %s, %s)"
 LOGIN = "CALL Login(%s, %s)"
 
 # ! Use only to append the table name !

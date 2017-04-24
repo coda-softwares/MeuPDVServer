@@ -17,6 +17,20 @@ Rotas (Routes)
         "STATUS": "SUCCESSFUL"
     }
     ```
+* Registrar novo usuario`POST` `/register`:
+    * chamada
+    ```json
+    {
+        "name": "Bianca Da Costa",
+        "username": "bicosta",
+        "password": "2017",
+        "id_contato": 2
+    }
+    ```
+    * retorno
+    ```json
+    ```
+
 * Teste ver dados de uma tabela `POST` `/show`:
     * chamada
     ```json

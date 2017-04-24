@@ -2,8 +2,37 @@ import dbmanager as dbm
 import json as JSON
 # import hmac
 
+# VEJA REST_SCHEME.md
+
 # Encoder de json, para retornar para o usuário
 json = JSON.JSONEncoder()
+
+# FIXME: Não cadastra e nem retorna algum erro
+# Registrar usuário pela utilização de procedures
+def register(req):
+    params = {}
+
+    try:
+        params = req.json # convert a entrada do body para json
+    except Exception as e:
+        return req.Response(text=json.encode({'status':'REGISTER_FAILED'}))
+
+    nome = params['nome']
+    username = params['username']
+    password = params['password']
+    id_contato = params['id_contato']
+
+    data = {'status': 'REGISTER_AND_AUTOLOGIN_FAILED'}
+    with dbm.Connection() as con:
+        re = con.execute(dbm.REGISTER, [password, username, nome, id_contato])
+        rel = con.execute(dbm.LOGIN, [username, password])
+        if len(rel)==0:
+            data['status'] = 'REGISTER_AND_AUTOLOGIN_SUCCESSFUL'
+        else:
+            data['response_from_db'] = str(re)
+
+    return req.Response(text=json.encode(data), mime_type='json')
+
 
 # Recebe logins do usuário
 def login(req):
@@ -13,6 +42,7 @@ def login(req):
         params = req.json # convert a entrada do body para json
     except Exception as e:
         print(str(e))
+        return req.Response(text='Invalid Body')
 
     # Dados de retorno
     data = {
@@ -31,7 +61,7 @@ def login(req):
 def logout(req):
     return req.Response(text='Not implemented yet')
 
-
+# Lista valores dentro de determinas tabelas (veja REST_SCHEME.md '/show')
 def show(req):
     params = {}
 
@@ -39,6 +69,7 @@ def show(req):
         params = req.json # convert a entrada do body para json
     except Exception as e:
         print(str(e))
+        return req.Response(text='Invalid Body')
 
     # META part where we identify what table to show
     table_name = params['table_name']
@@ -54,7 +85,7 @@ def delete(req):
     params = {}
 
     try:
-        params = req.json
+        params = req.json # convert a entrada do body para json
     except Exception as e:
         print(str(e))
         return req.Response(text='Invalid Body')
@@ -63,25 +94,9 @@ def delete(req):
     where = params['where']
     equals = params['equals']
 
+
+    data = {'status': 'DELETE_IN_DEV'}
     with dbm.Connection() as con:
         con.execute(dbm.delete_from(table_name), [where, equals])
 
-# Registrar usuário pela utilização de procedures
-def register(req):
-    params = {}
-
-    try:
-        params = req.json
-    except Exception as e:
-        return req.Response(text=json.encode({'status':'REGISTER_FAILED'}))
-
-    nome = paramas['nome']
-    username = params['username']
-    password = params['password']
-
-    data = {'res':None}
-    with dbm.Connection() as con:
-        con.execute(dbm.REGISTER, [nome, userame, password])
-        data['res'] = con.execute(dbm.REGISTER, [username, password])
-
-    return req.Response(text=json.encode(data), mime_type='json')
+    return req.Response(text=json.encode(data))
